@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'bottom_sheet_action.dart';
@@ -65,6 +66,19 @@ Future<T?> _show<T>(
   bool isDismissible = true,
   bool? useRootNavigator,
 }) {
+  if (kIsWeb) {
+    return _showMaterialBottomSheet(
+      context,
+      title,
+      actions,
+      cancelAction,
+      barrierColor,
+      bottomSheetColor,
+      androidBorderRadius,
+      isDismissible: isDismissible,
+      useRootNavigator: useRootNavigator,
+    );
+  }
   if (Platform.isIOS) {
     return _showCupertinoBottomSheet(
       context,
